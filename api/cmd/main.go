@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"link-share-api/internal/routes"
 	"link-share-api/pkg/database"
 	"log"
 	"os"
@@ -27,6 +28,10 @@ func main() {
 			"message": "OK",
 		})
 	})
+
+	api := r.Group("/api")
+
+	routes.AuthRoute(api, db)
 
 	PORT := os.Getenv("PORT")
 	r.Run(fmt.Sprintf(":%s", PORT))
